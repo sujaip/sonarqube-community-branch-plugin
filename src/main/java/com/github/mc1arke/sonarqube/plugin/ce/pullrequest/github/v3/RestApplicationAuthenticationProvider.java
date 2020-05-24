@@ -79,7 +79,7 @@ public class RestApplicationAuthenticationProvider implements GithubApplicationA
 
         ObjectMapper objectMapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
-        URLConnection appConnection = urlProvider.createUrlConnection(apiUrl + "/app/installations");
+        URLConnection appConnection = urlProvider.createUrlConnection(apiUrl + (apiUrl.endsWith("api") ? "/v3" : (apiUrl.endsWith("api/") ? "v3" : "")) + "/app/installations");
         appConnection.setRequestProperty(ACCEPT_HEADER, APP_PREVIEW_ACCEPT_HEADER);
         appConnection.setRequestProperty(AUTHORIZATION_HEADER, BEARER_AUTHORIZATION_HEADER_PREFIX + jwtToken);
 
