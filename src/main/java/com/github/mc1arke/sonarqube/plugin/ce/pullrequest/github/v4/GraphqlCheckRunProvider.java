@@ -146,9 +146,7 @@ public class GraphqlCheckRunProvider implements CheckRunProvider {
 
 
         GraphQLRequestEntity.RequestBuilder graphQLRequestEntityBuilder =
-                graphqlProvider.createRequestBuilder()
-                        .url(apiUrl + "/graphql")
-                        .headers(headers)
+                graphqlProvider.createRequestBuilder().url(apiUrl + (apiUrl.endsWith("/") ? "graphql" : "/graphql")).headers(headers)
                         .request(CreateCheckRun.class)
                         .arguments(new Arguments("createCheckRun", new Argument<>("input", repositoryInputObjectBuilder
                                 .put("headSha", analysisDetails.getCommitSha())
